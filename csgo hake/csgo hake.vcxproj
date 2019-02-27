@@ -95,7 +95,7 @@
       <DisableSpecificWarnings>4390;4312;4311;4302</DisableSpecificWarnings>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>NotSet</SubSystem>
       <AdditionalLibraryDirectories>SDK Path\Lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -131,7 +131,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>NotSet</SubSystem>
       <AdditionalLibraryDirectories>SDK Path\Lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

@@ -132,7 +132,7 @@ struct vec3
 		a.yaw = (atan2f(resVec.y, resVec.x) * 180 / PI);
 
 		float straightDist = sqrtf(pow(resVec.x, 2) + pow(resVec.y, 2));
-		a.pitch = -(atan2f(resVec.z, straightDist) * 180 / PI);
+		a.pitch = -(atanf(resVec.z/straightDist) * 180 / PI);
 
 
 		return a;

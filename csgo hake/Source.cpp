@@ -34,12 +34,12 @@ int main()
 	}
 
 
-	std::cout << "Hooked";
+	std::cout << "Hooked\n";
 
 	moduleSetup();
 	setup();
 	
-	std::cout << "Setup Complete, running";
+	std::cout << "Setup Complete, running\n";
 
 
 	while (true)
@@ -52,6 +52,9 @@ int main()
 		}
 
 		cheat::isOn = true;
+
+		cheat::handleBhop();
+
 
 		if (cheat::once)
 		{

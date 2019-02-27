@@ -3,8 +3,10 @@
 bool cheat::isOn = false;
 bool cheat::once = true;
 
+bool predictAim = false; // for laggy ass computers
+
+float predictFactor = 1.f;
 float recoilCompensationFactor = 2.f;
-bool predictAim = false;
 
 unsigned char playerStatus;
 int localTeam;
@@ -26,29 +28,34 @@ int id = 0;
 float angles[2]; // {pitch, yaw}
 unsigned char offsetAngleArr[sizeof(float) * 2];
 
-struct
-{
-	float pitch = 0;
-	float yaw = 0;
-} offsetAngle;
-
 void cheat::handleAimbot()
 {
+
+	if (GetAsyncKeyState(VK_XBUTTON1) < 0)
+	{
+		while (GetAsyncKeyState(VK_XBUTTON1) < 0) Sleep(10);
+		id++;
+		id %= offset::dynamic::entityList.size();
+	}
+
 	if (!(GetAsyncKeyState(VK_XBUTTON2) < 0))
 		return;
 
 
 	unsigned int currplayer = offset::dynamic::entityList[id];
 
-	while (mem::read<int>((void*)(currplayer + offset::player::health)) <= 0 || offset::dynamic::entityTeamMap[id] == localTeam)
+	while (mem::read<int>((void*)(currplayer + offset::player::health)) <= 0 || offset::dynamic::entityTeamMap[id] == localTeam || mem::read<bool>((void*)(currplayer + offset::player::isDormant)) )
 	{
 
 		if (!(GetAsyncKeyState(VK_XBUTTON2) < 0))
 			return;
 
+
 		id++;
 		id %= offset::dynamic::entityList.size();
 		currplayer = offset::dynamic::entityList[id];
+		
+		Sleep(10);
 	}
 
 
@@ -69,13 +76,16 @@ void cheat::handleAimbot()
 		mem::read((void*)(currplayer + offset::player::velocityX), vec3::size, enemyVelArr);
 		vec3 enemyVel = vec3::parse(enemyVelArr);
 
-		enemyplayer = enemyplayer + (enemyVel * offset::dynamic::intervalBetweenTick);
+		enemyplayer = enemyplayer + (enemyVel * offset::dynamic::intervalBetweenTick) * predictFactor;
 	}
 
 	angle aimangle = vec3::calcAngle(enemyplayer - myplayer);
 
 
 	mem::read((void*)(offset::dynamic::localPlayer + offset::LP_AIMPUNCHPITCH), sizeof(float) * 2, offsetAngleArr);
+
+	angle offsetAngle;
+
 	for (int i = 0; i < 2; i++)
 	{
 		unsigned char a[4];

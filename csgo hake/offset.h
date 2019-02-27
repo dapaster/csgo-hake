@@ -5,23 +5,22 @@
 struct offset
 {
 	// +jump offset
-	const static unsigned int JUMPOFFSET = 0x517E1C4;
+	const static unsigned int JUMPOFFSET = 0x517E234;
 
 	// glowObjectManager
-	const static unsigned int GLOWOBJMANAGER = 0x521AF50;
+	const static unsigned int GLOWOBJMANAGER = 0x521AFA8;
 
 	// localPlayer
-	const static unsigned int LPOFFSET = 0xCCA6A4;
+	const static unsigned int LPOFFSET = 0xCCA6B4;
 	const static unsigned int LP_STATUSOFFSET = 0x104;
 	const static unsigned int LP_AIMPUNCHPITCH = 0x302C;
 
 	// entityList
-	const static unsigned int ELOFFSET = 0x4CDB00C;
+	const static unsigned int ELOFFSET = 0x4CDB07C;
 
 	// baseClientState
 	const static unsigned int BCSOFFSET = 0x58BCFC;
 	const static unsigned int BCS_PITCH = 0x4D88;
-	const static unsigned int BCS_YAW = 0x4D8C;
 
 	// bone matrix
 	const static unsigned int BMOFFSET = 0x26A8;
@@ -82,6 +81,8 @@ struct offset
 		const static unsigned int glowIndex = 0xA3F8;
 
 		const static unsigned int teamNum = 0xF4;
+
+		const static unsigned int isDormant = 0xED;
 
 	};
 
